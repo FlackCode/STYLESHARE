@@ -18,15 +18,6 @@
         "department": "Unisex"
     },
     {
-        "image": "/pic3.webp",
-        "brand": "Nike x Streetwear x Vintage",
-        "size": "L",
-        "name": "Y2K Nike nylon small swoosh black",
-        "price": "85",
-        "category": "Bottoms",
-        "department": "Unisex"
-    },
-    {
         "image": "/pic4.webp",
         "brand": "Oakley x Japanese Brand",
         "size": "M",
@@ -34,5 +25,14 @@
         "price": "45",
         "category": "Tops",
         "department": "Men"
+    },
+    {
+        "image": "/pic3.webp",
+        "brand": "Nike x Streetwear x Vintage",
+        "size": "L",
+        "name": "Y2K Nike nylon small swoosh black",
+        "price": "85",
+        "category": "Bottoms",
+        "department": "Unisex"
     }
 ]

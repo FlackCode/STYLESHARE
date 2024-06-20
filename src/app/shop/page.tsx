@@ -10,10 +10,14 @@ export default function Shop() {
   const productArray = products
   const { filters } = useFilterContext()
   const [isOpen, setIsOpened] = useState(false)
+  const [sortCriteria, setSortCriteria] = useState<string>("")
+
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortCriteria(e.target.value);
+  }
 
   const handleMobileFilterOpen = () => {
     setIsOpened(!isOpen)
-    console.log('works')
   }
 
   const calculateEmptyColumns = (columns: number) => {
@@ -31,13 +35,23 @@ export default function Shop() {
     return matchesDepartment && matchesCategory && matchesSize;
   })
 
+  const sortedProducts = filteredProducts.sort((a, b) => {
+    if (sortCriteria === "cheapest") {
+      return Number(a.price) - Number(b.price)
+    } else if (sortCriteria === "most_expensive") {
+      return Number(b.price) - Number(a.price)
+    }
+    return 0
+  })
+
   return (
     <div className="px-4 md:px-8 xl:px-80 xsm:py-4 xl:py-16 flex flex-col">
       <div className="flex flex-row justify-between items-center">
-        <p className="font-bold xsm:text-base md:text-lg">{filteredProducts.length} listings</p>
+        <p className="font-bold xsm:text-base md:text-lg">{sortedProducts.length} listings</p>
         <div className="flex gap-4 items-center">
-          <select className='xsm:text-xs md:text-sm font-semibold border-1 border-black px-2 py-1 focus:outline-none'>
-            <option value="">Sort By</option>
+          <select className='xsm:text-xs md:text-sm font-semibold border-1 border-black px-2 py-1 focus:outline-none' value={sortCriteria} onChange={handleSortChange}>
+            <option value="" disabled>Sort By</option>
+            <option value="0">Default</option>
             <option value="cheapest">Cheapest</option>
             <option value="most_expensive">Most Expensive</option>
           </select>

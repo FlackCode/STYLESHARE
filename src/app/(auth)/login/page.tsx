@@ -1,16 +1,15 @@
 "use client"
 import Link from "next/link";
-import { useState } from "react";
 
 export default function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        // Handle login logic here
-        console.log("Email:", email, "Password:", password);
-    };
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        const formData = new FormData(e.currentTarget)
+        const { email, password } = Object.fromEntries(formData)
+        console.log("Email:", email, "Password:", password)
+        e.currentTarget.reset()
+    }
 
     return (
         <main className="header flex flex-col justify-center items-center px-2 py-16">
@@ -20,16 +19,14 @@ export default function Login() {
                     <input
                         type="email"
                         placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        name="email"
                         className="border border-black px-4 py-2 xsm:text-xs md:text-sm focus:outline-none"
                         required
                     />
                     <input
                         type="password"
                         placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        name="password"
                         className="border border-black px-4 py-2 xsm:text-xs md:text-sm focus:outline-none"
                         required
                     />

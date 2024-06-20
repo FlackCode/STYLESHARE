@@ -3,9 +3,15 @@
 @tailwind utilities;
 
 .header {
-    min-height: 70svh;
+    min-height: 80svh;
 }
 
 .text-xxs {
     font-size: 10px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+html, body {
+  font-family: 'Inter', sans-serif;
 }

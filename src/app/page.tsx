@@ -1,8 +1,4 @@
-import { Metadata } from "next"
-
-export const metadata: Metadata = {
-  title: "Home | Styleshare"
-}
+import Link from "next/link"
 
 export default function Home() {
   return (
@@ -11,12 +7,14 @@ export default function Home() {
         <h1 className="xsm:text-3xl md:text-5xl font-bold text-center">FIND YOUR OWN STYLE</h1>
         <p className="xsm:text-lg md:text-xl font-semibold text-center">Buy and sell clothes, build your own style from our variety of clothes and accessories.</p>
         <div className="flex justify-center gap-8 w-full">
-            <button className="w-1/2 border border-black py-4 font-bold xsm:text-xs md:text-sm transition-all duration-300 hover:bg-black hover:text-white">
-                SHOP MENSWEAR
-            </button>
-            <button className="w-1/2 border border-black py-4 font-bold xsm:text-xs md:text-sm transition-all duration-300 hover:bg-black hover:text-white">
-                SHOP WOMENSWEAR
-            </button>
+          <Link href={'/shop'}
+          className="w-1/2 border border-black py-4 font-bold xsm:text-xs md:text-sm transition-all duration-300 hover:bg-black hover:text-white text-center">
+            SHOP MENSWEAR
+          </Link>
+          <Link href={'/shop'}
+          className="w-1/2 border border-black py-4 font-bold xsm:text-xs md:text-sm transition-all duration-300 hover:bg-black hover:text-white text-center">
+            SHOP WOMENSWEAR
+          </Link>
         </div>
       </div>
     </main>
