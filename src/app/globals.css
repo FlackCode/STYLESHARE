@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.header {
+    min-height: 70svh;
+}
+
+.text-xxs {
+    font-size: 10px;
+}

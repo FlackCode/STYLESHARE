@@ -1,0 +1,38 @@
+[
+    {
+        "image": "/pic1.webp",
+        "brand": "Chrome Hearts",
+        "size": "OS",
+        "name": "Chrome Hearts Glasses grey",
+        "price": "1260",
+        "category": "Headwear",
+        "department": "Men"
+    },
+    {
+        "image": "/pic2.webp",
+        "brand": "Adidas x Maison Margiela",
+        "size": "M",
+        "name": "BW Sport GAT Leather Shoes Maison Margiela",
+        "price": "100",
+        "category": "Footwear",
+        "department": "Unisex"
+    },
+    {
+        "image": "/pic3.webp",
+        "brand": "Nike x Streetwear x Vintage",
+        "size": "L",
+        "name": "Y2K Nike nylon small swoosh black",
+        "price": "85",
+        "category": "Bottoms",
+        "department": "Unisex"
+    },
+    {
+        "image": "/pic4.webp",
+        "brand": "Oakley x Japanese Brand",
+        "size": "M",
+        "name": "Vintage 2000`s Oakley T-Shirt",
+        "price": "45",
+        "category": "Tops",
+        "department": "Men"
+    }
+]
