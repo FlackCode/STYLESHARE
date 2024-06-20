@@ -2,14 +2,16 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
-import Menu from "@/components/Menu";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Home | Styleshare",
-  description: "Homepage of Styleshare",
-};
+  title: {
+    absolute: "",
+    default: "Styleshare",
+    template: "%s | Styleshare",
+  }
+}
 
 export default function RootLayout({
   children,
@@ -18,10 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className='min-h-screen'>
         <div className="flex flex-col">
           <Nav />
-          <Menu />
         </div>
         {children}
       </body>

@@ -1,3 +1,9 @@
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Home | Styleshare"
+}
+
 export default function Home() {
   return (
     <main className="header flex flex-col justify-center items-center px-2">
