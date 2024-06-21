@@ -13,7 +13,7 @@ export default function Home() {
           </Link>
           <Link href={'/shop'}
           className="w-1/2 border border-black py-4 font-bold xsm:text-xs md:text-sm transition-all duration-300 hover:bg-black hover:text-white text-center">
-            SHOP WOMENSWEAR
+            SHOP WOMENSWEAR {process.env.FIREBASE_KEY}
           </Link>
         </div>
       </div>

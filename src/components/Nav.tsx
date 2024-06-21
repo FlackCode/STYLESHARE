@@ -2,7 +2,7 @@ import { BsSearch, BsPersonFill } from 'react-icons/bs'
 import Link from 'next/link';
 
 const Nav = () => {
-  const isLoggedIn = true
+  const isLoggedIn = false
 
   return (
     <div className="text-background py-4 px-2 xl:px-80 border-b sticky">

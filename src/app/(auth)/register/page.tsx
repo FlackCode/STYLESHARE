@@ -1,14 +1,35 @@
 "use client"
+import { auth, db } from "@/lib/firebase"
+import { createUserWithEmailAndPassword } from "firebase/auth"
+import { doc, setDoc } from "firebase/firestore"
 import Link from "next/link"
 
 export default function Register() {
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
-        const { username, email, password } = Object.fromEntries(formData)
-        console.log("Username:", username, "Email:", email, "Password:", password)
-        e.currentTarget.reset()
+        const username = formData.get('username') as string
+        const email = formData.get('email') as string
+        const password = formData.get('password') as string
+        if (username && email && password) {
+            try {
+                const res = createUserWithEmailAndPassword(auth, email, password)
+
+                await setDoc(doc(db, 'users', (await res).user.uid), {
+                    username,
+                    email,
+                    id: (await res).user.uid,
+                    userProducts: []
+                })
+
+                console.log('Successfully registered')
+                e.currentTarget.reset()
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
     }
 
     return (
