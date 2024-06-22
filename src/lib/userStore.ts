@@ -2,10 +2,24 @@ import { doc, getDoc } from "firebase/firestore";
 import { create } from "zustand";
 import { db } from "./firebase";
 
-export const useUserStore = create((set) => ({
+interface User {
+    uid: string;
+    username: string;
+    email: string;
+    userProducts: string[];
+    phone: string;
+    fullName: string;
+}
+
+interface UserStore {
+    currentUser: User | null;
+    fetchUserInfo: (uid: string | null) => Promise<void>
+}
+
+export const useUserStore = create<UserStore>((set) => ({
     currentUser: null,
 
-    fetchUserInfo: async (uid : any) => {
+    fetchUserInfo: async (uid : string | null) => {
         if (!uid) return set({
             currentUser: null
         })
@@ -16,7 +30,7 @@ export const useUserStore = create((set) => ({
 
             if (docSnap.exists()) {
                 set({
-                    currentUser: docSnap.data()
+                    currentUser: docSnap.data() as User
                 })
             } else {
                 set({

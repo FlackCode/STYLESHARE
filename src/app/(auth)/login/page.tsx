@@ -1,14 +1,39 @@
 "use client"
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+    const [error, setError] = useState<string | null>(null)
+    const router = useRouter()
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
-        const { email, password } = Object.fromEntries(formData)
-        console.log("Email:", email, "Password:", password)
-        e.currentTarget.reset()
+        const email = formData.get('email') as string
+        const password = formData.get('password') as string
+
+        try {
+            const res = await fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            })
+
+            const data = await res.json()
+
+            if (res.ok) {
+                setError(null)
+                e.currentTarget.reset()
+                router.push('/')
+            } else {
+                setError(data.error)
+            }
+        } catch (error) {
+            setError('Something went wrong. Please try again.')
+        }
     }
 
     return (

@@ -1,10 +1,13 @@
 "use client"
-import { auth, db } from "@/lib/firebase"
-import { createUserWithEmailAndPassword } from "firebase/auth"
-import { doc, setDoc } from "firebase/firestore"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useRef, useState } from "react"
 
 export default function Register() {
+    const [error, setError] = useState(null)
+    const [success, setSuccess] = useState(null)
+    const formRef = useRef<HTMLFormElement>(null)
+    const router = useRouter()
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -12,22 +15,33 @@ export default function Register() {
         const username = formData.get('username') as string
         const email = formData.get('email') as string
         const password = formData.get('password') as string
+        
         if (username && email && password) {
             try {
-                const res = createUserWithEmailAndPassword(auth, email, password)
+                const res = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, email, password })
+                });
 
-                await setDoc(doc(db, 'users', (await res).user.uid), {
-                    username,
-                    email,
-                    id: (await res).user.uid,
-                    userProducts: []
-                })
+                const data = await res.json()
 
-                console.log('Successfully registered')
-                e.currentTarget.reset()
-
+                if (res.ok) {
+                    setSuccess(data.message)
+                    setError(null)
+                    if (formRef.current) {
+                        formRef.current.reset()
+                    }
+                    router.push('/')
+                } else {
+                    setError(data.error)
+                    setSuccess(null)
+                }
             } catch (error) {
-                console.log(error)
+                setError(null)
+                setSuccess(null)
             }
         }
     }
@@ -36,7 +50,7 @@ export default function Register() {
         <main className="header flex flex-col justify-center items-center px-2 py-16">
             <div className="flex flex-col justify-center items-center gap-8 max-w-xl w-full">
                 <h1 className="xsm:text-3xl md:text-5xl font-bold text-center">REGISTER</h1>
-                <form className="flex flex-col gap-4 w-full" onSubmit={handleSubmit}>
+                <form className="flex flex-col gap-4 w-full" onSubmit={handleSubmit} ref={formRef}>
                     <input
                         type="text"
                         placeholder="Username"
